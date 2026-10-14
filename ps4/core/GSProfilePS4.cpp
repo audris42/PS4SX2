@@ -18,7 +18,8 @@ void PS4GSProfile::LogInterval(double seconds)
 	constexpr const char* names[] = {"reuse_fence", "explicit_wait", "fence_counter", "acquire",
 		"submit", "present", "idle", "pipeline", "shader", "hw_draw", "vk_render",
 		"texture_update", "readback", "sw_sprite",
-		"lookup_source", "lookup_depth_source", "lookup_draw_target", "surface_offset", "invalidate_video", "invalidate_local", "target_update"};
+		"lookup_source", "lookup_depth_source", "lookup_draw_target", "surface_offset", "invalidate_video", "invalidate_local", "target_update",
+		"draw_prims", "blend_setup", "sampler_setup", "channel_shuffle", "texture_shuffle"};
 	static_assert(std::size(names) == Count);
 	for (unsigned i = 0; i < Count; i++)
 	{
