@@ -32,6 +32,11 @@ namespace PS4GSProfile
 		InvalidateVideo,
 		InvalidateLocal,
 		TargetUpdate,
+		DrawPrims,
+		BlendSetup,
+		SamplerSetup,
+		ChannelShuffle,
+		TextureShuffle,
 		Count
 	};
 	struct Counter
