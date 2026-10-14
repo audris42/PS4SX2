@@ -6480,6 +6480,7 @@ void GSRendererHW::EmulateDither()
 
 void GSRendererHW::EmulateTextureShuffleAndFbmask(GSTextureCache::Target* rt, GSTextureCache::Source* tex)
 {
+	PS4_GS_SCOPE(TextureShuffle);
 	// Uncomment to disable texture shuffle emulation.
 	// m_texture_shuffle.Disable();
 
@@ -6664,6 +6665,7 @@ bool GSRendererHW::TestChannelShuffle(GSTextureCache::Target* src)
 
 __ri u32 GSRendererHW::EmulateChannelShuffle(GSTextureCache::Target* src, bool test_only, GSTextureCache::Target* rt)
 {
+	PS4_GS_SCOPE(ChannelShuffle);
 	if (src && src->m_texture->IsDepthLike() && !src->m_32_bits_fmt)
 	{
 		// So far 2 games hit this code path. Urban Chaos and Tales of Abyss
@@ -6929,6 +6931,7 @@ __ri u32 GSRendererHW::EmulateChannelShuffle(GSTextureCache::Target* src, bool t
 void GSRendererHW::EmulateBlending(int rt_alpha_min, int rt_alpha_max, DATEOptions& date_options,
 	GSTextureCache::Target* rt, bool can_scale_rt_alpha, bool& new_rt_alpha_scale)
 {
+	PS4_GS_SCOPE(BlendSetup);
 	const GIFRegALPHA& ALPHA = m_context->ALPHA;
 	{
 		// PABE: Check condition early as an optimization, no blending when As < 128.
@@ -8119,6 +8122,7 @@ __ri static constexpr u8 EffectiveClamp(u8 clamp, bool has_region)
 __ri void GSRendererHW::EmulateTextureSampler(const GSTextureCache::Target* rt, const GSTextureCache::Target* ds, GSTextureCache::Source* tex,
 	const TextureMinMaxResult& tmm, GSDevice::RecycledTexture& src_copy)
 {
+	PS4_GS_SCOPE(SamplerSetup);
 	// don't overwrite the texture when using channel shuffle, but keep the palette
 	if (!m_channel_shuffle)
 	{
@@ -9457,6 +9461,7 @@ void GSRendererHW::ResetStates()
 
 __ri void GSRendererHW::DrawPrims(GSTextureCache::Target* rt, GSTextureCache::Target* ds, GSTextureCache::Source* tex, const TextureMinMaxResult& tmm)
 {
+	PS4_GS_SCOPE(DrawPrims);
 #ifdef ENABLE_OGL_DEBUG
 	const GSVector4i area_out = GSVector4i(m_vt.m_min.p.upld(m_vt.m_max.p)).rintersect(m_context->scissor.in);
 	const GSVector4i area_in = GSVector4i(m_vt.m_min.t.upld(m_vt.m_max.t));
